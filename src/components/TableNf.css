@@ -1,0 +1,9 @@
+.tableNf {
+	display: grid;
+	grid-template-columns: repeat(2,25%);
+}
+
+.campos {
+	display: grid;
+	grid-template-columns: repeat(3,50%);
+}
