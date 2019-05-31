@@ -15,7 +15,7 @@ class SimpleReactFileUpload extends React.Component {
   onFormSubmit(e){
     e.preventDefault() // Stop form submit
     this.fileUpload(this.state.file).then((response)=>{
-      console.log('Funcionou!');
+      console.log(response);
     })
   }
   onChange(e) {
@@ -25,12 +25,7 @@ class SimpleReactFileUpload extends React.Component {
     const url = 'https://conductive-coil-239500.appspot.com/invoice';
 
     const formData = new FormData();
-    formData.append('file',{
-      uri: file.uri,
-      type: file.type,
-      name: file.name,
-    });
-    //formData.append('file',file)
+    formData.append('file',file)
     formData.append('id_brand','1')
     formData.append('id_store','1')
     formData.append('user_phone','5521979562322')

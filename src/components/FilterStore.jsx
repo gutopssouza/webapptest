@@ -25,7 +25,7 @@ componentDidMount() {
 
 	render() {
 		return (
-			<select value={this.state.selectedStores}
+			<select class="form-control" id="lojaForm" value={this.state.selectedStores}
 				onChange={(e) => this.setState({selectedStores: e.target.value})}>
 				{this.state.stores.map((store) => <option key={store.value} value={store.value}>{store.display}</option>)}
 			</select>
