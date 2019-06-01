@@ -5,6 +5,7 @@ import ImageUpload from "./ImageUpload";
 import Main from './template/Main'
 import Filters from './Filters'
 import ProductTable from './ProductTable'
+import axios from 'axios';
 
 const headerProps = {
     title: 'Painel Administrador',
@@ -12,6 +13,22 @@ const headerProps = {
 }
 
 export default class TableNf extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state ={
+      file:null
+    }
+    this.saveNF = this.saveNF.bind(this)
+    this.updateField = this.updateField.bind(this)
+    this.onFileChanged = this.onFileChanged.bind(this);
+  }
+
+  onFileChanged(newFile) {
+    this.setState({file : newFile}, ()=>{
+      console.log('File uploaded by ImageUpload component '+ newFile);
+    })
+  }
 
   updateField(event) {
     
@@ -21,11 +38,23 @@ export default class TableNf extends React.Component {
     
   }
 
+  saveNF(file) {
+    const url = 'https://conductive-coil-239500.appspot.com/invoice';
+
+    const formData = new FormData();
+    formData.append('file',file)
+    formData.append('id_brand','1')
+    formData.append('id_store','1')
+    formData.append('user_phone','5521979562322')
+    return axios.post(url, formData)
+  }
+
   renderFilter(){
     return (
       <div>
         <Filters />
       </div>
+
     )
   }
 
@@ -35,7 +64,7 @@ export default class TableNf extends React.Component {
         <div className="row">
           <div className="col-12col-md-6">
             <div className="form-group">
-              <ImageUpload />
+              <ImageUpload file={this.state.file} onFileChanged={this.onFileChanged}/>
             </div>
           </div>
           <div className="form">
@@ -109,6 +138,11 @@ export default class TableNf extends React.Component {
                     placeholder="Valor com desconto (R$)"/>
                 </div>
               </div>
+              <div className="col-12col-md-6">
+			  	      <div className="form-group ml-2">
+			  		      <button className="btn btn-primary" onClick={this.saveNF}>Salvar Nota Fiscal</button>
+				        </div>
+			        </div>
             </div>
           </div>
         </div>

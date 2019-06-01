@@ -1,0 +1,9 @@
+.nfDiv {
+    height: 500px; 
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    background-color: lavender;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}

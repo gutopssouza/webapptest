@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
+import './ImageUpload.css'
 
 
 export default function Previews(props) {
@@ -32,7 +33,7 @@ const thumbInner = {
 const img = {
   display: 'block',
   width: 'auto',
-  height: '100%'
+  height: '500px'
 };
 
 
@@ -44,11 +45,14 @@ const img = {
       setFiles(acceptedFiles.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file)
       })));
+      let newFile = acceptedFiles;
+      props.onFileChanged(newFile);
     }
   });
+
   
   const thumbs = files.map(file => (
-    <div style={thumb} key={file.name}>
+    <div className='thumb' key={file.name}>
       <div style={thumbInner}>
         <img
           src={file.preview}
@@ -61,13 +65,19 @@ const img = {
   const render = Object.keys(files).length !== 0 ? (
         files.map(file => <aside>{thumbs}</aside>)
       ) : (
-        <p className="hello">Clique ou arraste para adicionar uma nota fiscal</p>
+        <div className='nfDiv'>
+          <div>
+          <p>Clique ou arraste uma Nota Fiscal</p>
+          <i className="material-icons">receipt</i>
+          </div>
+          </div>
       );
 
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
     files.forEach(file => URL.revokeObjectURL(file.preview));
   }, [files]);
+
 
   return (
     <section className="container">

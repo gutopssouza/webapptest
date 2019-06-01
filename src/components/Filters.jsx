@@ -1,11 +1,12 @@
 import React from 'react'
 import FilterBrand from './FilterBrand'
 import FilterStore from './FilterStore'
-import FilterDate from './FilterDate'
+import './Filters.css'
 
 export default () =>
 	<div className="form">
-		<div className="row">
+		<div className="row ml-2">
+			<label className="mt-2">Pesquisa</label>
 			<div className="col-12col-md-6">
             	<div className="form-group ml-2">
 					<FilterBrand brandsDb={['Malwee','Dudalina','Beagle']} />
